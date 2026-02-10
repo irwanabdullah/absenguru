@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMP Negeri 13 Makassar</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://img.icons8.com/fluency/48/school.png" type="image/png">
+	
+	<!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .hero-section {
+            background: linear-gradient(rgba(30, 58, 138, 0.7), rgba(30, 58, 138, 0.7)), url('https://i.ibb.co.com/BVVHXt8h/Kantor1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .card-zoom:hover img { transform: scale(1.1); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-blue-700">SMPN 13 Makassar</span>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#home" class="hover:text-blue-600 font-medium">Beranda</a>
+                    
+                    <!-- Dropdown Profil -->
+                    <div class="relative dropdown">
+                        <button class="flex items-center hover:text-blue-600 font-medium py-4 outline-none">
+                            Profil <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-lg w-48 py-2 mt-0 border border-gray-100">
+                            <a href="#welcome" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Sambutan</a>
+                            <a href="#about" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Visi & Misi</a>
+                            <a href="#curriculum" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Kurikulum</a>
+                        </div>
+                    </div>
+
+                    <a href="#news" class="hover:text-blue-600 font-medium">Berita</a>
+                    <a href="#facilities" class="hover:text-blue-600 font-medium">Sarana</a>
+                    <a href="#extracurricular" class="hover:text-blue-600 font-medium">Ekstrakurikuler</a>
+                    <a href="#gallery" class="hover:text-blue-600 font-medium">Galeri</a>
+                    <a href="#teachers" class="hover:text-blue-600 font-medium">Guru</a>
+                    <a href="#contact" class="hover:text-blue-600 font-medium">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-white py-32 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Membentuk Generasi Cerdas,<br>Unggul & Berkarakter</h1>
+            <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Selamat Datang di Portal Resmi SMP Negeri 13 Makassar. Mendidik dengan hati, menginspirasi dengan inovasi.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#news" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition shadow-lg">Jelajahi Berita</a>
+                <a href="#welcome" class="bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">Profil Sekolah</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Banner -->
+    <div class="bg-yellow-400 py-3 overflow-hidden whitespace-nowrap">
+        <div id="info-ticker" class="inline-block animate-pulse font-bold text-blue-900 px-4 text-sm md:text-base">
+            Memuat informasi terbaru SMPN 13 Makassar...
+        </div>
+    </div>
+
+    <!-- Sambutan Kepala Sekolah Section -->
+    <section id="welcome" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/3">
+                    <div class="relative">
+                        <div class="absolute -bottom-4 -right-4 w-full h-full border-4 border-blue-600 rounded-2xl z-0"></div>
+                        <img src="https://i.ibb.co.com/ZRH3VNmd/ramli.jpg" alt="Kepala Sekolah SMPN 13 Makassar" class="rounded-2xl shadow-xl relative z-10 w-full h-[450px] object-cover object-top">
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-2 text-blue-900">Sambutan Kepala Sekolah</h2>
+                    <div class="h-1 w-20 bg-blue-600 mb-6"></div>
+                    <p class="text-gray-600 mb-4 leading-relaxed italic">"Assalamu'alaikum Warahmatullahi Wabarakatuh,"</p>
+                    <p class="text-gray-600 mb-4 leading-relaxed">Selamat datang di website resmi SMP Negeri 13 Makassar. Di era digital ini, kami berkomitmen untuk terus berinovasi dalam memberikan layanan pendidikan terbaik serta transparansi informasi kepada seluruh civitas akademika dan masyarakat luas.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">Kami percaya bahwa setiap peserta didik memiliki potensi unik yang harus diasah dengan karakter yang kuat. Mari bersama-sama membangun generasi emas yang cerdas dan kompetitif.</p>
+                    <p class="font-bold text-blue-900">Drs. Ramli, M.Pd</p>
+                    <p class="text-sm text-gray-500">Kepala Sekolah SMP Negeri 13 Makassar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil (Visi Misi) Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-blue-900 border-l-4 border-blue-600 pl-4">Visi & Misi</h2>
+                    <div class="mb-8">
+                        <h4 class="font-bold text-blue-700 mb-2 uppercase tracking-wide">Visi</h4>
+                        <p class="text-gray-700 text-lg font-medium italic">"Terwujudnya lulusan yang bertaqwa, cerdas, terampil, berbudaya lingkungan, dan unggul dalam prestasi."</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-blue-700 mb-2 uppercase tracking-wide">Misi</h4>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i> Mengembangkan lingkungan sekolah yang religius dan toleran.</li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i> Melaksanakan pembelajaran aktif, kreatif, efektif dan menyenangkan.</li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-blue-500 mt-1 mr-3"></i> Menumbuhkan budaya literasi dan kepedulian terhadap lingkungan hidup.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-2xl h-[400px]">
+                    <img src="https://i.ibb.co.com/BVVHXt8h/Kantor1.jpg" alt="Gedung SMPN 13 Makassar" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kurikulum Section -->
+    <section id="curriculum" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Kurikulum</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 border rounded-2xl hover:bg-blue-50 transition border-gray-100 text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Kurikulum Merdeka</h3>
+                    <p class="text-gray-600 text-sm">Penerapan kurikulum terbaru yang memberikan keleluasaan bagi guru untuk menciptakan pembelajaran berkualitas yang sesuai dengan kebutuhan siswa.</p>
+                </div>
+                <div class="p-8 border rounded-2xl hover:bg-blue-50 transition border-gray-100 text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">P5</h3>
+                    <p class="text-gray-600 text-sm">Proyek Penguatan Profil Pelajar Pancasila sebagai sarana pencapaian karakter bangsa pada peserta didik.</p>
+                </div>
+                <div class="p-8 border rounded-2xl hover:bg-blue-50 transition border-gray-100 text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Digitalisasi</h3>
+                    <p class="text-gray-600 text-sm">Optimalisasi penggunaan perangkat digital dalam asesmen dan proses pembelajaran harian.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Sarana & Prasarana -->
+    <section id="facilities" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-blue-900 mb-4">Sarana & Prasarana</h2>
+            <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Fasilitas pendukung yang nyaman untuk memaksimalkan potensi akademik dan non-akademik siswa.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-zoom overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=400" alt="Perpustakaan" class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-500">
+                    <h4 class="font-bold text-blue-900">Perpustakaan</h4>
+                    <p class="text-sm text-gray-500 mt-2">Ruang baca yang nyaman dengan koleksi literasi yang beragam.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-zoom overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400" alt="Lab Komputer" class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-500">
+                    <h4 class="font-bold text-blue-900">Lab Komputer</h4>
+                    <p class="text-sm text-gray-500 mt-2">Laboratorium dengan koneksi internet untuk pembelajaran TIK.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-zoom overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=400" alt="Lab IPA" class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-500">
+                    <h4 class="font-bold text-blue-900">Laboratorium IPA</h4>
+                    <p class="text-sm text-gray-500 mt-2">Fasilitas praktikum untuk pengamatan sains dan penelitian dasar.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 card-zoom overflow-hidden">
+                    <img src="https://i.ibb.co.com/tpJpxJNh/Whats-App-Image-2025-11-29-at-09-23-32-3.jpg" alt="Lapangan" class="w-full h-40 object-cover rounded-lg mb-4 transition-transform duration-500">
+                    <h4 class="font-bold text-blue-900">Area Olahraga</h4>
+                    <p class="text-sm text-gray-500 mt-2">Lapangan luas untuk kegiatan olahraga dan upacara bendera.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ekstrakurikuler Section -->
+    <section id="extracurricular" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">Ekstrakurikuler</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
+                <p class="mt-6 text-slate-500">Wadah kreativitas dan pengembangan diri siswa di luar jam pelajaran.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-blue-600 transition-all duration-300" data-aos="zoom-in">
+                    <i class="bi bi-shield-check text-4xl text-blue-600 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">Pramuka</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-red-600 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="bi bi-heart-pulse text-4xl text-red-600 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">PMR</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-orange-600 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="bi bi-dribbble text-4xl text-orange-600 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">Basket</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-indigo-600 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="bi bi-music-note-beamed text-4xl text-indigo-600 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">Paduan Suara</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-green-600 transition-all duration-300" data-aos="zoom-in">
+                    <i class="bi bi-palette text-4xl text-green-600 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">Seni Lukis</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-blue-400 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="bi bi-keyboard text-4xl text-blue-400 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">IT Club</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-yellow-600 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="bi bi-journal-text text-4xl text-yellow-600 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">KIR</h4>
+                </div>
+                <div class="p-6 bg-white dark:bg-slate-800 rounded-2xl text-center group hover:bg-red-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="bi bi-flag text-4xl text-red-500 group-hover:text-white mb-4 block"></i>
+                    <h4 class="font-bold group-hover:text-white">Paskibra</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-blue-900">Berita & Artikel</h2>
+                    <p class="text-gray-600">Update kegiatan dan prestasi SMPN 13 Makassar.</p>
+                </div>
+            </div>
+            <div id="news-list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <p class="col-span-full text-center py-10">Memuat berita...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Modal -->
+    <div id="news-modal" class="fixed inset-0 z-[60] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col relative animate-in fade-in zoom-in duration-300">
+            <!-- Close Button -->
+            <button onclick="closeNewsModal()" class="absolute top-4 right-4 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-gray-800 transition">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="overflow-y-auto">
+                <img id="modal-image" src="" class="w-full h-64 md:h-80 object-cover" alt="Berita">
+                <div class="p-6 md:p-10">
+                    <span id="modal-date" class="text-blue-600 font-bold text-sm uppercase tracking-widest"></span>
+                    <h2 id="modal-title" class="text-2xl md:text-3xl font-extrabold text-blue-900 mt-2 mb-6 leading-tight"></h2>
+                    <div id="modal-content" class="text-gray-700 leading-relaxed space-y-4">
+                        <!-- Teks berita lengkap masuk di sini -->
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 border-t flex justify-end">
+                <button onclick="closeNewsModal()" class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-blue-900">Galeri Foto</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Momen berharga di lingkungan SMP Negeri 13 Makassar.</p>
+            <div id="gallery-list" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <p class="col-span-full text-center py-10 text-gray-400">Memuat galeri foto...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Tenaga Pendidik</h2>
+            <div id="teachers-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <p class="col-span-full text-center py-10">Menghubungkan ke database guru...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak & Map Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Form Kotak Saran -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+                    <div class="bg-blue-700 p-6 text-white text-center">
+                        <h2 class="text-2xl font-bold">Hubungi Kami</h2>
+                        <p>Silakan kirim pesan atau saran untuk perbaikan layanan kami.</p>
+                    </div>
+                    <form id="contact-form" class="p-8 space-y-4 flex-grow">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nama Lengkap</label>
+                                <input type="text" id="name" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Email</label>
+                                <input type="email" id="email" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Pesan</label>
+                            <textarea id="message" rows="4" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition flex justify-center items-center">
+                            <span id="btn-text">Kirim Pesan</span>
+                            <div id="loader" class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white ml-2"></div>
+                        </button>
+                        <p id="form-feedback" class="text-center text-sm font-semibold hidden"></p>
+                    </form>
+                </div>
+
+                <!-- Map -->
+                <div class="rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+                    <div class="bg-gray-800 p-6 text-white text-center">
+                        <h2 class="text-2xl font-bold">Lokasi Sekolah</h2>
+                        <p>Kunjungi SMP Negeri 13 Makassar</p>
+                    </div>
+                    <div class="flex-grow min-h-[350px]">
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            style="border:0; min-height: 350px;" 
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2215.0842104210406!2d119.45003217313084!3d-5.172141322503221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1770084867298!5m2!1sid!2sid" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <div class="flex items-center text-gray-700 mb-2">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                            <span class="text-sm">Jl. Tamalate VI No. 1, Rappocini, Makassar</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-phone text-blue-600 mr-3"></i>
+                            <span class="text-sm">+62 411 862412</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-4 text-xl font-bold">SMP Negeri 13 Makassar</p>
+            <p class="opacity-70 mb-6 italic text-sm">"Berkarakter, Cerdas, dan Berprestasi"</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://facebook.com/smpn13makassar" target="_blank" class="text-2xl hover:text-blue-400 transition" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/smpn13makassar" target="_blank" class="text-2xl hover:text-blue-400 transition" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UClHxZ0L0NPkWOyd9CzisTAA" target="_blank" class="text-2xl hover:text-blue-400 transition" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="text-xs opacity-50">&copy; 2026 SMP Negeri 13 Makassar. Dikelola oleh Tim IT Sekolah.</p>
+        </div>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = "https://jfwfzjtapxkgtixehkgw.supabase.co"; 
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impmd2Z6anRhcHhrZ3RpeGVoa2d3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5NDc4MjEsImV4cCI6MjA4NTUyMzgyMX0.nTqsT6GABbFUbEqyKZxmoAJCNemGM0wV2-6ixcNd7pY"; 
+
+        let sbInstance = null;
+        if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+            sbInstance = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        async function fetchInfo() {
+            if (!sbInstance) return;
+            const ticker = document.getElementById('info-ticker');
+            try {
+                const { data } = await sbInstance.from('info').select('content').limit(1).single();
+                if (data) ticker.textContent = "INFO: " + data.content;
+            } catch (e) {}
+        }
+
+        async function fetchNews() {
+            const list = document.getElementById('news-list');
+            try {
+                const { data, error } = await sbInstance.from('news').select('*').order('created_at', { ascending: false }).limit(6);
+                if (error) throw error;
+                newsData = data; // Store globally for modal access
+
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p class="col-span-full text-center">Belum ada berita terbaru.</p>';
+                    return;
+                }
+
+                list.innerHTML = data.map((item, index) => `
+                    <div onclick="openNewsModal(${index})" class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition-all cursor-pointer group">
+                        <div class="overflow-hidden h-48">
+                            <img src="${item.image_url || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400'}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">${new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                            <h3 class="font-bold text-xl mt-2 mb-3 text-blue-900 leading-tight group-hover:text-blue-700">${item.title}</h3>
+                            <p class="text-gray-600 text-sm line-clamp-2">${item.summary}</p>
+                            <button class="mt-4 text-blue-600 font-bold text-xs uppercase hover:underline">Baca Selengkapnya</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                list.innerHTML = '<p class="col-span-full text-center text-red-500 text-sm">Gagal memuat berita.</p>';
+            }
+        }
+
+        function openNewsModal(index) {
+            const item = newsData[index];
+            if (!item) return;
+
+            document.getElementById('modal-image').src = item.image_url || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800';
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-date').textContent = new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            // Assuming content might have newlines, convert to paragraphs
+            const contentDiv = document.getElementById('modal-content');
+            const paragraphs = item.content || item.summary;
+            contentDiv.innerHTML = paragraphs.split('\n').map(p => `<p>${p}</p>`).join('');
+
+            const modal = document.getElementById('news-modal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        }
+
+        function closeNewsModal() {
+            const modal = document.getElementById('news-modal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        // Close on background click
+        document.getElementById('news-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeNewsModal();
+        });
+
+
+        async function fetchGallery() {
+            const list = document.getElementById('gallery-list');
+            if (!sbInstance) return;
+            try {
+                const { data, error } = await sbInstance.from('gallery').select('*').order('created_at', { ascending: false }).limit(8);
+                if (error) throw error;
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p class="col-span-full text-center text-gray-400">Galeri belum terisi.</p>';
+                    return;
+                }
+                list.innerHTML = data.map(img => `
+                    <div class="relative overflow-hidden group rounded-xl aspect-square shadow-sm">
+                        <img src="${img.image_url}" alt="${img.caption}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-blue-900 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                            <p class="text-white text-center text-sm font-medium">${img.caption || ''}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                list.innerHTML = '<p class="col-span-full text-center text-red-400">Gagal memuat galeri.</p>';
+            }
+        }
+
+        async function fetchTeachers() {
+            const listElement = document.getElementById('teachers-list');
+            if (!sbInstance) return;
+            try {
+                const { data, error } = await sbInstance.from('teachers').select('*');
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    listElement.innerHTML = data.map(teacher => `
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:-translate-y-2">
+                            <img src="${teacher.image_url || 'https://via.placeholder.com/300x400?text=Guru'}" class="w-full h-64 object-cover">
+                            <div class="p-6 text-center">
+                                <h3 class="font-bold text-lg text-blue-900">${teacher.name}</h3>
+                                <p class="text-gray-500 text-sm">${teacher.subject}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    listElement.innerHTML = '<p class="col-span-full text-center text-gray-500">Daftar guru belum tersedia.</p>';
+                }
+            } catch (err) {}
+        }
+
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!sbInstance) return;
+            const btn = document.getElementById('submit-btn');
+            const loader = document.getElementById('loader');
+            const feedback = document.getElementById('form-feedback');
+            btn.disabled = true;
+            loader.classList.remove('hidden');
+            feedback.classList.add('hidden');
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+                message_type: 'umum'
+            };
+            try {
+                const { error } = await sbInstance.from('messages').insert([formData]);
+                if (error) throw error;
+                feedback.textContent = "Berhasil! Pesan Anda telah terkirim.";
+                feedback.className = "text-center text-sm font-semibold text-green-600 block";
+                contactForm.reset();
+            } catch (err) {
+                feedback.textContent = "Maaf, terjadi kesalahan saat mengirim.";
+                feedback.className = "text-center text-sm font-semibold text-red-600 block";
+            } finally {
+                btn.disabled = false;
+                loader.classList.add('hidden');
+            }
+        });
+
+        window.onload = () => {
+            fetchInfo();
+            fetchNews();
+            fetchTeachers();
+            fetchGallery();
+        };
+    </script>
+	<script>
+// Disable klik kanan
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Disable shortcut keyboard Inspect
+document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.keyCode === 123) {
+        e.preventDefault();
+    }
+
+    // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && 
+       (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+        e.preventDefault();
+    }
+
+    // Ctrl+U (View Source)
+    if (e.ctrlKey && e.keyCode === 85) {
+        e.preventDefault();
+    }
+});
+
+// Deteksi DevTools terbuka
+setInterval(function() {
+    const before = new Date().getTime();
+    debugger;
+    const after = new Date().getTime();
+    if (after - before > 100) {
+        document.body.innerHTML = "<h1>Akses Ditolak</h1>";
+    }
+}, 1000);
+</script>
+
+</body>
+</html>
