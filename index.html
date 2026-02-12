@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi Guru Online</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f0f2f5; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .card-presensi {
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header-deco {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+            padding: 30px;
+            color: white;
+            text-align: center;
+        }
+        #preview {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .form-control {
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #d1d3e2;
+        }
+        .btn-custom {
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-5">
+            <div class="card card-presensi">
+                
+                <div class="header-deco">
+                    <h4 class="m-0 fw-bold">E-PRESENSI GURU</h4>
+                    <p class="small m-0 opacity-75">Sistem Absensi Berbasis Lokasi</p>
+                </div>
+
+                <div class="card-body p-4">
+                    
+                    <div id="loginSection">
+                        <div class="text-center mb-4">
+                            <h5 class="fw-bold text-secondary">Silahkan Masuk</h5>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">NIP</label>
+                            <input type="text" id="nip" class="form-control" placeholder="Masukkan NIP Anda">
+                        </div>
+                        <div class="mb-4">
+							<label class="form-label small fw-bold">Password</label>
+							<div class="input-group">
+								<input type="password" id="pass" class="form-control" placeholder="••••••••" style="border-right: none;">
+								<span class="input-group-text bg-white" style="border-left: none; border-radius: 0 12px 12px 0; cursor: pointer;" onclick="togglePassword()">
+									<i class="bi bi-eye-slash" id="toggleIcon"></i>
+								</span>
+							</div>
+						</div>
+                        <button class="btn btn-primary btn-custom w-100 mb-2" onclick="doLogin()">
+                            MASUK
+                        </button>
+                    </div>
+
+                    <div id="dashSection" class="hidden text-center">
+                        <div class="mb-3">
+                            <img id="preview" class="rounded-circle mb-3 shadow-sm">
+                            <h5 id="userName" class="fw-bold text-dark mb-1"></h5>
+                            <p id="userNip" class="text-muted small mb-4"></p>
+                        </div>
+
+                        <div class="card bg-light border-0 rounded-4 p-3 mb-4">
+                            <label class="form-label small fw-bold text-primary">Update Foto Profil</label>
+                            <input type="file" id="fileInput" class="form-control form-control-sm mb-2" accept="image/*" onchange="handleFile()">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill" onclick="doUpload()">
+                                Simpan Foto Baru
+                            </button>
+                        </div>
+
+                        <button id="btnAbsen" class="btn btn-success btn-custom w-100 py-3 shadow-sm" onclick="doAbsen()" disabled>
+                            📍 KIRIM ABSENSI SEKARANG
+                        </button>
+                        
+                        <p id="statusMsg" class="mt-3 small fw-bold text-primary"></p>
+						
+						<button class="btn btn-light btn-sm text-danger" onclick="location.reload()">
+							<i class="bi bi-power"></i> Keluar
+						</button>
+                    </div>
+
+                </div>
+            </div>
+            <p class="text-center mt-4 text-muted small">&copy; 2026 Sistem Absensi Sekolah</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // PENTING: GANTI DENGAN URL GOOGLE APPS SCRIPT ANDA
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwMX8dxCrgkfxhAyVm5gofdhmOj64pejDkKyniWOp2JcGlt840JpxL8kHDchwgQoqTB/exec";
+    
+    let user = null;
+
+    async function apiCall(payload) {
+        try {
+            const response = await fetch(WEB_APP_URL, {
+                method: "POST",
+                body: JSON.stringify(payload)
+            });
+            return await response.json();
+        } catch (error) {
+            Swal.fire('Error', 'Gagal terhubung ke server', 'error');
+        }
+    }
+
+    async function doLogin() {
+        const nip = document.getElementById('nip').value;
+        const pass = document.getElementById('pass').value;
+
+        if(!nip || !pass) {
+            return Swal.fire('Peringatan', 'NIP dan Password wajib diisi!', 'warning');
+        }
+
+        Swal.fire({ title: 'Menyambungkan...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+
+        const res = await apiCall({ action: "login", nip, pass });
+        Swal.close();
+
+        if(res && res.success) {
+            user = res;
+            // EFEK TRANSISI: Sembunyikan Login, Tampilkan Dash
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashSection').classList.remove('hidden');
+            
+            document.getElementById('userName').innerText = res.nama;
+            document.getElementById('userNip').innerText = "NIP: " + res.nip;
+
+            if(res.foto) {
+                document.getElementById('preview').src = res.foto;
+                document.getElementById('btnAbsen').disabled = false;
+            } else {
+                document.getElementById('preview').src = "https://via.placeholder.com/150?text=No+Photo";
+                Swal.fire('Info', 'Silahkan upload foto terlebih dahulu untuk bisa absen.', 'info');
+            }
+        } else {
+            Swal.fire('Gagal', res.msg || 'NIP atau Password salah', 'error');
+        }
+    }
+
+    function handleFile() {
+        const file = document.getElementById('fileInput').files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('preview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function doUpload() {
+        const fotoBase64 = document.getElementById('preview').src;
+        if(!fotoBase64.startsWith('data:image')) return Swal.fire('Opps', 'Pilih foto dulu', 'warning');
+        
+        Swal.fire({ title: 'Menyimpan Foto...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+        
+        const res = await apiCall({ action: "upload", nip: user.nip, foto: fotoBase64 });
+        Swal.close();
+
+        if(res.success) {
+            Swal.fire('Berhasil', 'Foto profil diperbarui, tombol absen aktif!', 'success');
+            document.getElementById('btnAbsen').disabled = false;
+        }
+    }
+
+    async function doAbsen() {
+        Swal.fire({
+            title: 'Mendeteksi Lokasi...',
+            text: 'Pastikan GPS Anda Aktif',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const res = await apiCall({ 
+                action: "absen", 
+                nip: user.nip, 
+                lat: pos.coords.latitude, 
+                long: pos.coords.longitude 
+            });
+            
+            Swal.close();
+            if(res.success) {
+                Swal.fire('Berhasil!', res.msg, 'success');
+            } else {
+                Swal.fire('Gagal!', res.msg, 'error');
+            }
+        }, (err) => {
+            Swal.fire('GPS Error', 'Gagal mendapatkan lokasi. Izinkan akses lokasi di browser Anda.', 'error');
+        }, { enableHighAccuracy: true });
+    }
+	
+	function togglePassword() {
+		const passwordField = document.getElementById('pass');
+		const toggleIcon = document.getElementById('toggleIcon');
+		
+		if (passwordField.type === 'password') {
+			passwordField.type = 'text';
+			toggleIcon.classList.remove('bi-eye-slash');
+			toggleIcon.classList.add('bi-eye');
+		} else {
+			passwordField.type = 'password';
+			toggleIcon.classList.remove('bi-eye');
+			toggleIcon.classList.add('bi-eye-slash');
+		}
+	}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
