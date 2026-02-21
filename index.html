@@ -95,10 +95,10 @@
 
                         <div class="card bg-light border-0 rounded-4 p-3 mb-4">
                             <label class="form-label small fw-bold text-primary">Update Foto Profil</label>
-                            <input type="file" id="fileInput" class="form-control form-control-sm mb-2" accept="image/*" onchange="handleFile()">
-                            <button class="btn btn-outline-primary btn-sm rounded-pill" onclick="doUpload()">
-                                Simpan Foto Baru
-                            </button>
+							<input type="file" id="fileInput" class="hidden" accept="image/*" onchange="handleFile()">
+							<button type="button" class="form-control form-control-sm mb-2 btn btn-light text-start" onclick="triggerPilihFoto()">
+								<i class="bi bi-camera"></i> Pilih Foto dari HP / PC
+							</button>
                         </div>
 
                         <button id="btnAbsen" class="btn btn-success btn-custom w-100 py-3 shadow-sm" onclick="doAbsen()" disabled>
@@ -236,6 +236,25 @@
 			toggleIcon.classList.add('bi-eye-slash');
 		}
 	}
+	
+	// FUNGSI BARU: Deteksi Web vs Kodular
+    function triggerPilihFoto() {
+        if (window.AppInventor) {
+            // Jika aplikasi berjalan di Kodular, kirim pesan ke blok Kodular
+            window.AppInventor.setWebViewString("BUKA_GALERI");
+        } else {
+            // Jika berjalan di Web / GitHub biasa, panggil input file yang disembunyikan
+            document.getElementById('fileInput').click();
+        }
+    }
+
+    // FUNGSI BARU: Menerima Base64 dari Kodular lalu menaruhnya di Preview
+    // (Fungsi doUpload() Anda sudah otomatis akan mengambil dari src preview ini)
+    function terimaFotoDariKodular(base64Data) {
+        document.getElementById('preview').src = base64Data;
+        Swal.fire('Berhasil', 'Foto dipilih, silahkan klik Simpan Foto Baru', 'success');
+    }
+	
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
