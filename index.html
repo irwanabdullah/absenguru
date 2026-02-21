@@ -99,6 +99,7 @@
 							<button type="button" class="form-control form-control-sm mb-2 btn btn-light text-start" onclick="triggerPilihFoto()">
 								<i class="bi bi-camera"></i> Pilih Foto dari HP / PC
 							</button>
+							
                         </div>
 
                         <button id="btnAbsen" class="btn btn-success btn-custom w-100 py-3 shadow-sm" onclick="doAbsen()" disabled>
@@ -121,7 +122,7 @@
 
 <script>
     // PENTING: GANTI DENGAN URL GOOGLE APPS SCRIPT ANDA
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwMX8dxCrgkfxhAyVm5gofdhmOj64pejDkKyniWOp2JcGlt840JpxL8kHDchwgQoqTB/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyH_9E-EpUdmvk42X2u-eZYQaOposXu957IIRrfKv_bKwitDrdCgtOSrc5NrIM1kzDe/exec";
     
     let user = null;
 
@@ -172,13 +173,36 @@
     }
 
     function handleFile() {
-        const file = document.getElementById('fileInput').files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            document.getElementById('preview').src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
+    const file = document.getElementById('fileInput').files[0];
+    if (!file) return; // Batalkan jika user tidak jadi memilih foto
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+        // 1. Tampilkan foto di layar (Preview)
+        const fotoBase64 = e.target.result;
+        document.getElementById('preview').src = fotoBase64;
+        
+        // 2. LANGSUNG KIRIM KE SPREADSHEET (Otomatis)
+        Swal.fire({ 
+            title: 'Menyimpan Foto...', 
+            text: 'Sedang mengunggah ke database',
+            allowOutsideClick: false, 
+            didOpen: () => { Swal.showLoading(); } 
+        });
+        
+        // Memanggil API Upload ke Google Apps Script
+        const res = await apiCall({ action: "upload", nip: user.nip, foto: fotoBase64 });
+        Swal.close();
+
+        if(res.success) {
+            Swal.fire('Berhasil', 'Foto langsung tersimpan di Database Spreadsheet!', 'success');
+            document.getElementById('btnAbsen').disabled = false; // Aktifkan tombol absen
+        } else {
+            Swal.fire('Gagal', 'Terjadi kesalahan saat menyimpan foto', 'error');
+        }
+    };
+    reader.readAsDataURL(file);
+}
 
     async function doUpload() {
         const fotoBase64 = document.getElementById('preview').src;
@@ -254,6 +278,29 @@
         document.getElementById('preview').src = base64Data;
         Swal.fire('Berhasil', 'Foto dipilih, silahkan klik Simpan Foto Baru', 'success');
     }
+	
+	async function terimaFotoDariKodular(base64Data) {
+    // 1. Tampilkan foto di layar (Preview)
+    document.getElementById('preview').src = base64Data;
+    
+    // 2. LANGSUNG KIRIM KE SPREADSHEET (Otomatis)
+    Swal.fire({ 
+        title: 'Menyimpan Foto...', 
+        text: 'Sedang mengunggah ke database',
+        allowOutsideClick: false, 
+        didOpen: () => { Swal.showLoading(); } 
+    });
+    
+    const res = await apiCall({ action: "upload", nip: user.nip, foto: base64Data });
+    Swal.close();
+
+    if(res.success) {
+        Swal.fire('Berhasil', 'Foto dari Kamera/Galeri langsung tersimpan di Database!', 'success');
+        document.getElementById('btnAbsen').disabled = false;
+    } else {
+        Swal.fire('Gagal', 'Terjadi kesalahan saat menyimpan foto', 'error');
+    }
+}
 	
 </script>
 
